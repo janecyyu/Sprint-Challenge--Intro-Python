@@ -13,18 +13,6 @@ class City():
         return f'{self.name},{self.lat},{self.lon}'
 
 
-# We have a collection of US cities with population over 750,000 stored in the
-# file "cities.csv". (CSV stands for "comma-separated values".)
-#
-# In the body of the `cityreader` function, use Python's built-in "csv" module
-# to read this file so that each record is imported into a City instance. Then
-# return the list with all the City instances from the function.
-# Google "python 3 csv" for references and use your Google-fu for other examples.
-#
-# Store the instances in the "cities" list, below.
-#
-# Note that the first line of the CSV is header that describes the fields--this
-# should not be loaded into a City object.
 cities = []
 
 
@@ -36,7 +24,7 @@ def cityreader(cities=[]):
         reader = csv.reader(csvfile)
         next(reader, None)
         for row in reader:
-            new_city = City(row[0], row[3], row[4])
+            new_city = City(row[0], float(row[3]), float(row[4]))
             cities.append(new_city)
 
     return cities
@@ -84,7 +72,8 @@ for c in cities:
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
-
+    lat_dis = abs(lat1-lat2)
+    lon_dis = abs(lon1-lon2)
     # TODO Ensure that the lat and lon valuse are all floats
     # Go through each city and check to see if it falls within
     # the specified coordinates.
